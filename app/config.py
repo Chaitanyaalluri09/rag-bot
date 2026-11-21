@@ -1,0 +1,10 @@
+import os
+from dotenv import load_dotenv
+
+load_dotenv()  # reads the .env file
+
+DATABASE_URL = os.getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise RuntimeError("DATABASE_URL is missing. Create a .env file (see .env.example).")
+
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
