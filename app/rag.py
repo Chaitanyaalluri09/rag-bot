@@ -4,9 +4,10 @@ from app.llm import build_prompt, generate_answer
 
 
 def answer_question(question, k=5):
-    conn = get_connection()
     query_vector = embed_texts([question])[0]
-    results = search(conn, query_vector, k=k)
+
+    with get_connection() as conn:  # closes automatically when done
+        results = search(conn, query_vector, k=k)
 
     if not results:
         return {"answer": "No documents have been ingested yet.", "sources": []}

@@ -79,3 +79,18 @@ def search(conn, query_vector, k=5):
         {"filename": f, "page": p, "content": text, "distance": float(dist)}
         for f, p, text, dist in rows
     ]
+def list_documents(conn):
+    """Return every document with how many chunks it has."""
+    rows = conn.execute(
+        """
+        SELECT d.id, d.filename, d.uploaded_at, count(c.id)
+        FROM documents d
+        LEFT JOIN chunks c ON c.document_id = d.id
+        GROUP BY d.id
+        ORDER BY d.id
+        """
+    ).fetchall()
+    return [
+        {"id": i, "filename": f, "uploaded_at": t, "chunks": n}
+        for i, f, t, n in rows
+    ]
