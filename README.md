@@ -8,7 +8,7 @@ Runs entirely on free-tier services.
 
 > The live demo runs on free hosting and may take about a minute to wake up if it has been idle.
 
-![Chat with sources](docs/chat.png)
+![Chat with sources](Docs/chat.png)
 
 ## What it does
 
